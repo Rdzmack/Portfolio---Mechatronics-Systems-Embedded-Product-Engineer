@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rodel DZIKA-MACKANGAS — Ingénieur Mécatronique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0c0e14;--bg2:#12151e;--bg3:#171b26;--card:#1a1f2e;
+  --border:#252d3d;--border2:#2e3a52;
+  --blue:#4f8ef7;--gold:#e8b84b;--teal:#38d9c0;--red:#f87171;
+  --text:#dde4f0;--text2:#8896ad;--text3:#4a566b;--white:#fff;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:400;overflow-x:hidden;line-height:1.6;}
+.orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:0.14;}
+.orb1{width:600px;height:600px;background:var(--blue);top:-200px;right:-100px;}
+.orb2{width:380px;height:380px;background:var(--teal);bottom:10%;left:-120px;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(12,14,20,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:60px;padding:0 3rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--blue);}
+.nav-links{display:flex;gap:0.2rem;}
+.nb{font-family:'Outfit',sans-serif;font-size:0.76rem;font-weight:500;padding:0.38rem 0.9rem;border-radius:6px;border:1px solid transparent;background:transparent;color:var(--text2);cursor:pointer;text-decoration:none;transition:all 0.2s;display:block;}
+.nb:hover,.nb.active{color:var(--white);background:rgba(79,142,247,0.1);border-color:rgba(79,142,247,0.25);}
+.nav-avail{display:flex;align-items:center;gap:0.5rem;font-size:0.7rem;color:var(--text3);font-weight:500;}
+.dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.35;}}
+
+/* ── SECTIONS ── */
+section{min-height:100vh;position:relative;z-index:1;display:none;padding-top:60px;}
+section.active{display:block;}
+
+/* ════════ HOME ════════ */
+.hero{max-width:1180px;margin:0 auto;padding:4rem 3rem 2rem;display:grid;grid-template-columns:1fr 360px;gap:5rem;align-items:center;min-height:calc(100vh - 120px);}
+.hero-eye{display:flex;align-items:center;gap:0.6rem;font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:1.2rem;}
+.hero-eye::before{content:'';width:26px;height:1.5px;background:var(--blue);}
+.hname{font-family:'Outfit',sans-serif;font-size:clamp(2.6rem,5vw,4.8rem);font-weight:900;line-height:0.92;letter-spacing:-0.03em;color:var(--white);margin-bottom:0.5rem;}
+.hname .acc{background:linear-gradient(135deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hrole{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:300;color:var(--text2);margin-bottom:1.5rem;letter-spacing:0.02em;}
+.hbio{font-size:0.93rem;color:var(--text2);line-height:1.75;max-width:500px;margin-bottom:2rem;font-weight:300;}
+.hchips{display:flex;flex-wrap:wrap;gap:0.45rem;margin-bottom:2.5rem;}
+.chip{font-size:0.68rem;font-weight:600;letter-spacing:0.06em;padding:0.28rem 0.75rem;border-radius:20px;}
+.chip.b{background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.25);color:var(--blue);}
+.chip.g{background:rgba(232,184,75,0.1);border:1px solid rgba(232,184,75,0.25);color:var(--gold);}
+.chip.t{background:rgba(56,217,192,0.1);border:1px solid rgba(56,217,192,0.25);color:var(--teal);}
+
+/* ACTION BUTTONS */
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;max-width:500px;}
+.abtn{font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;padding:0.72rem 1.1rem;border-radius:10px;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:all 0.25s;border:none;justify-content:center;text-align:center;}
+.abtn-icon{font-size:1rem;}
+.abtn.primary{background:linear-gradient(135deg,var(--blue),#6b9ff8);color:#fff;box-shadow:0 4px 18px rgba(79,142,247,0.3);}
+.abtn.primary:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(79,142,247,0.45);}
+.abtn.teal{background:linear-gradient(135deg,var(--teal),#5ae8d4);color:#0c1a18;box-shadow:0 4px 18px rgba(56,217,192,0.25);}
+.abtn.teal:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(56,217,192,0.4);}
+.abtn.gold{background:linear-gradient(135deg,var(--gold),#f0cc6a);color:#1a1200;box-shadow:0 4px 18px rgba(232,184,75,0.25);}
+.abtn.gold:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(232,184,75,0.4);}
+.abtn.outline{background:transparent;color:var(--text);border:1px solid var(--border2);}
+.abtn.outline:hover{border-color:var(--blue);color:var(--white);background:rgba(79,142,247,0.06);}
+
+/* PHOTO */
+.photo-wrap{display:flex;justify-content:center;}
+.pframe{position:relative;width:300px;height:360px;}
+.pframe::before{content:'';position:absolute;inset:-3px;border-radius:22px;background:linear-gradient(135deg,var(--blue),var(--teal),var(--gold));z-index:0;}
+.pinner{position:absolute;inset:2px;border-radius:20px;overflow:hidden;z-index:1;background:var(--bg3);}
+.pinner img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.pbadge{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--border2);padding:0.45rem 1.1rem;border-radius:28px;z-index:2;display:flex;align-items:center;gap:0.45rem;white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,0.4);}
+.pbdot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;}
+.pbtxt{font-family:'Outfit',sans-serif;font-size:0.68rem;font-weight:600;color:var(--white);}
+
+/* STATS */
+.stats{border-top:1px solid var(--border);max-width:1180px;margin:0 auto;padding:1.5rem 3rem 2.5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.sblock{background:var(--bg);padding:1.2rem;text-align:center;}
+.snum{font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.slabel{font-size:0.68rem;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-top:0.1rem;}
+
+/* ════════ PAGE WRAPPER ════════ */
+.pw{max-width:1180px;margin:0 auto;padding:3rem 3rem 5rem;}
+.sh{margin-bottom:2.5rem;}
+.se{font-size:0.68rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.6rem;}
+.se::before{content:'';width:18px;height:1.5px;background:var(--blue);}
+.st{font-family:'Outfit',sans-serif;font-size:clamp(1.7rem,3vw,2.5rem);font-weight:800;color:var(--white);line-height:1.05;letter-spacing:-0.02em;}
+.st span{background:linear-gradient(135deg,var(--teal),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ssub{font-size:0.86rem;color:var(--text2);max-width:500px;margin-top:0.5rem;line-height:1.65;font-weight:300;}
+
+/* ════════ FILTER TABS ════════ */
+.filter-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.ftab{font-family:'Outfit',sans-serif;font-size:0.74rem;font-weight:600;padding:0.42rem 1rem;border-radius:8px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;transition:all 0.2s;}
+.ftab:hover{border-color:var(--blue);color:var(--text);}
+.ftab.on{background:rgba(79,142,247,0.12);border-color:rgba(79,142,247,0.4);color:var(--blue);}
+
+/* ════════ PROJECT CARDS ════════ */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.1rem;}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.6rem;display:flex;flex-direction:column;gap:0.9rem;text-decoration:none;color:inherit;position:relative;overflow:hidden;transition:all 0.28s;cursor:pointer;}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,var(--blue),var(--teal));opacity:0;transition:opacity 0.28s;}
+.pcard:hover{border-color:rgba(79,142,247,0.35);transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,0.35);}
+.pcard:hover::before{opacity:1;}
+.pcard.feat{background:linear-gradient(135deg,rgba(79,142,247,0.07),var(--card));}
+.pcard.hidden{display:none;}
+
+.ctop{display:flex;align-items:center;justify-content:space-between;gap:0.5rem;flex-wrap:wrap;}
+.cnum{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;color:var(--text3);text-transform:uppercase;}
+.cbadges{display:flex;gap:0.3rem;flex-wrap:wrap;}
+.cbdg{font-size:0.58rem;font-weight:700;letter-spacing:0.08em;padding:0.18rem 0.5rem;border-radius:10px;}
+.cbdg.blue{background:rgba(79,142,247,0.12);color:var(--blue);border:1px solid rgba(79,142,247,0.2);}
+.cbdg.gold{background:rgba(232,184,75,0.12);color:var(--gold);border:1px solid rgba(232,184,75,0.2);}
+.cbdg.teal{background:rgba(56,217,192,0.12);color:var(--teal);border:1px solid rgba(56,217,192,0.2);}
+.cbdg.red{background:rgba(248,113,113,0.12);color:var(--red);border:1px solid rgba(248,113,113,0.2);}
+.cbdg.fe{background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.2);}
+.cbdg.be{background:rgba(34,197,94,0.12);color:#22c55e;border:1px solid rgba(34,197,94,0.2);}
+
+.cname{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:700;color:var(--white);line-height:1.15;}
+.crole{font-size:0.72rem;font-weight:500;color:var(--blue);margin-top:0.1rem;}
+.cdesc{font-size:0.78rem;color:var(--text2);line-height:1.65;font-weight:300;flex:1;}
+.ctags{display:flex;flex-wrap:wrap;gap:0.3rem;}
+.ctag{font-size:0.6rem;font-weight:500;padding:0.15rem 0.45rem;border-radius:5px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);color:var(--text3);transition:all 0.2s;}
+.pcard:hover .ctag{border-color:rgba(79,142,247,0.2);color:var(--text2);}
+.carrow{display:flex;align-items:center;gap:0.4rem;font-size:0.7rem;font-weight:600;color:var(--teal);margin-top:auto;transition:gap 0.2s;}
+.pcard:hover .carrow{gap:0.7rem;}
+
+/* ════════ SECTEURS ════════ */
+.sec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem;margin-bottom:3rem;}
+.sec-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.6rem;cursor:pointer;transition:all 0.25s;}
+.sec-card:hover,.sec-card.open{border-color:rgba(79,142,247,0.35);box-shadow:0 8px 28px rgba(0,0,0,0.3);}
+.sec-card.open{background:linear-gradient(135deg,rgba(79,142,247,0.06),var(--card));}
+.sec-top{display:flex;align-items:center;gap:1rem;margin-bottom:0.8rem;}
+.sec-ico{font-size:1.8rem;}
+.sec-name{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;color:var(--white);}
+.sec-sub{font-size:0.72rem;color:var(--text2);font-weight:300;}
+.sec-projs{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.7rem;}
+.sec-proj-tag{font-size:0.62rem;font-weight:600;padding:0.2rem 0.55rem;border-radius:8px;background:rgba(79,142,247,0.08);border:1px solid rgba(79,142,247,0.18);color:var(--blue);}
+
+/* SECTOR DETAIL PANEL */
+.sec-detail{display:none;margin-top:2rem;background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:2rem;animation:fadeIn 0.3s ease;}
+.sec-detail.open{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.sd-title{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:800;color:var(--white);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.7rem;}
+.sd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.5rem;}
+.sd-block{background:var(--bg3);padding:1.2rem;}
+.sd-bttl{font-size:0.63rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.6rem;}
+.sd-items{display:flex;flex-direction:column;gap:0.25rem;}
+.sd-item{font-size:0.73rem;color:var(--text2);display:flex;align-items:center;gap:0.4rem;font-weight:300;}
+.sd-item::before{content:'›';color:var(--blue);font-weight:700;}
+.sd-projs-title{font-size:0.63rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.8rem;}
+.sd-proj-list{display:flex;flex-direction:column;gap:0.5rem;}
+.sd-proj{display:flex;align-items:center;gap:0.8rem;padding:0.6rem 0.9rem;background:var(--bg3);border-radius:8px;border:1px solid var(--border);}
+.sd-proj-name{font-size:0.8rem;font-weight:600;color:var(--white);flex:1;}
+.sd-proj-type{font-size:0.6rem;font-weight:700;padding:0.15rem 0.45rem;border-radius:6px;}
+.sd-proj-type.pro{background:rgba(56,217,192,0.1);color:var(--teal);border:1px solid rgba(56,217,192,0.2);}
+.sd-proj-type.perso{background:rgba(232,184,75,0.1);color:var(--gold);border:1px solid rgba(232,184,75,0.2);}
+.sd-proj-fe{font-size:0.58rem;font-weight:700;padding:0.13rem 0.4rem;border-radius:5px;background:rgba(168,85,247,0.1);color:#a855f7;border:1px solid rgba(168,85,247,0.2);}
+.sd-proj-be{font-size:0.58rem;font-weight:700;padding:0.13rem 0.4rem;border-radius:5px;background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.2);}
+
+/* ════════ CONTACT ════════ */
+.contact-hero{background:linear-gradient(135deg,rgba(79,142,247,0.07),var(--card));border:1px solid var(--border);border-radius:16px;padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:2rem;}
+.cht{font-family:'Outfit',sans-serif;font-size:1.6rem;font-weight:800;color:var(--white);margin-bottom:0.5rem;}
+.cht span{background:linear-gradient(135deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.chs{font-size:0.83rem;color:var(--text2);line-height:1.65;font-weight:300;}
+.contact-btns{display:flex;flex-direction:column;gap:0.6rem;}
+.cbtn{display:flex;align-items:center;gap:0.9rem;padding:0.8rem 1.1rem;border-radius:10px;border:1px solid var(--border);text-decoration:none;color:var(--text);font-size:0.8rem;font-weight:500;transition:all 0.22s;background:rgba(255,255,255,0.02);cursor:pointer;}
+.cbtn:hover{border-color:var(--blue);color:var(--white);background:rgba(79,142,247,0.06);}
+.cbtn.ref-btn{border-color:rgba(232,184,75,0.3);color:var(--gold);}
+.cbtn.ref-btn:hover{background:rgba(232,184,75,0.06);border-color:var(--gold);}
+.cbtn-icon{font-size:1.1rem;}
+.cbtn-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--text3);text-transform:uppercase;min-width:70px;}
+
+/* REF MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(6,8,16,0.85);z-index:800;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;padding:2rem;max-width:480px;width:90%;position:relative;animation:fadeIn 0.25s ease;}
+.modal-close{position:absolute;top:1rem;right:1rem;background:transparent;border:none;color:var(--text3);font-size:1.3rem;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:all 0.2s;}
+.modal-close:hover{background:var(--bg3);color:var(--text);}
+.modal-title{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:0.4rem;}
+.modal-sub{font-size:0.78rem;color:var(--text2);margin-bottom:1.5rem;line-height:1.6;}
+.mfield{margin-bottom:1rem;}
+.mfield label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);display:block;margin-bottom:0.35rem;}
+.mfield input,.mfield textarea,.mfield select{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:0.6rem 0.8rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.82rem;outline:none;transition:border-color 0.2s;}
+.mfield input:focus,.mfield textarea:focus,.mfield select:focus{border-color:var(--blue);}
+.mfield textarea{resize:vertical;min-height:80px;}
+.mfield select option{background:var(--bg2);}
+.modal-actions{display:flex;gap:0.6rem;margin-top:1.2rem;}
+.mbtn-send{font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:700;padding:0.65rem 1.4rem;border-radius:8px;background:linear-gradient(135deg,var(--gold),#f0cc6a);color:#1a1200;border:none;cursor:pointer;transition:all 0.2s;flex:1;}
+.mbtn-send:hover{box-shadow:0 6px 20px rgba(232,184,75,0.35);}
+.mbtn-cancel{font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;padding:0.65rem 1.2rem;border-radius:8px;background:transparent;color:var(--text2);border:1px solid var(--border2);cursor:pointer;}
+
+/* XP LIST */
+.xpl{display:flex;flex-direction:column;gap:0;margin-top:2rem;}
+.xpi{display:flex;gap:2rem;padding:1.4rem 0;border-bottom:1px solid var(--border);}
+.xpi:last-child{border-bottom:none;}
+.xpl-left{min-width:120px;}
+.xdate{font-size:0.68rem;font-weight:600;color:var(--text3);line-height:1.7;}
+.xco{font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:700;color:var(--blue);margin-top:0.25rem;}
+.xjob{font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:700;color:var(--white);}
+.xcomp{font-size:0.75rem;color:var(--text2);margin-bottom:0.3rem;}
+.xdesc{font-size:0.75rem;color:var(--text2);line-height:1.65;font-weight:300;max-width:600px;}
+
+/* DIVBAR */
+.divb{display:flex;align-items:center;gap:1.2rem;margin:2.5rem 0 1.5rem;}
+.divb-label{font-size:0.63rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--text3);white-space:nowrap;}
+.divb-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent);}
+
+/* FORMATIONS */
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:10px;overflow:hidden;}
+.fblock{background:var(--card);padding:1.3rem;}
+.fyear{font-size:0.6rem;font-weight:700;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.4rem;}
+.fdeg{font-family:'Outfit',sans-serif;font-size:0.92rem;font-weight:700;color:var(--white);line-height:1.2;margin-bottom:0.25rem;}
+.fschool{font-size:0.72rem;color:var(--blue);font-weight:500;}
+.floc{font-size:0.65rem;color:var(--text3);}
+
+/* ANIM */
+.fi{opacity:0;transform:translateY(18px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.fi.vis{opacity:1;transform:none;}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:0 1.3rem;}
+  .hero{grid-template-columns:1fr;gap:2.5rem;padding:2.5rem 1.5rem 2rem;}
+  .photo-wrap{order:-1;}
+  .pframe{width:220px;height:265px;margin:0 auto;}
+  .stats{grid-template-columns:repeat(2,1fr);padding:1.5rem;}
+  .pw{padding:2rem 1.5rem 4rem;}
+  .pgrid{grid-template-columns:1fr;}
+  .sec-grid{grid-template-columns:1fr;}
+  .sd-grid{grid-template-columns:1fr;}
+  .contact-hero{grid-template-columns:1fr;gap:2rem;}
+  .fgrid{grid-template-columns:1fr;}
+  .xpi{flex-direction:column;gap:0.35rem;}
+  .action-grid{grid-template-columns:1fr;}
+  .divb{margin:2rem 0 1rem;}
+}
+@media(max-width:600px){
+  .nav-avail{display:none;}
+  .stats{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#" onclick="go('home');return false;">Rodel <span>D.</span></a>
+  <div class="nav-links">
+    <a class="nb active" id="nav-home" href="#" onclick="go('home');return false;">Accueil</a>
+    <a class="nb" id="nav-projets" href="#" onclick="go('projets');return false;">Projets</a>
+    <a class="nb" id="nav-secteurs" href="#" onclick="go('secteurs');return false;">Secteurs</a>
+    <a class="nb" id="nav-contact" href="#" onclick="go('contact');return false;">Contact</a>
+  </div>
+  <div class="nav-avail"><div class="dot"></div>Disponible</div>
+</nav>
+
+<!-- ════════════════ HOME ════════════════ -->
+<section id="home" class="active">
+  <div class="hero">
+    <div>
+      <div class="hero-eye">Ingénieur Mécatronique · Portfolio 2025</div>
+      <div class="hname">Rodel<br><span class="acc">DZIKA-MACKANGAS</span></div>
+      <div class="hrole">Systèmes Mécatroniques &amp; Produits Embarqués</div>
+      <p class="hbio">Spécialisé en robotique industrielle, conception de machines spéciales et développement de modules embarqués (ARM Cortex-M/A). Du concept à l'industrialisation, alliant technicité et gestion Agile.</p>
+      <div class="hchips">
+        <span class="chip b">Embarqué</span>
+        <span class="chip b">Robotique</span>
+        <span class="chip g">Médical</span>
+        <span class="chip t">Aquatique</span>
+        <span class="chip g">Énergie</span>
+        <span class="chip b">Machines Ind.</span>
+        <span class="chip t">Automobile</span>
+      </div>
+      <div class="action-grid">
+        <a class="abtn primary" href="mailto:dzikamackangasrodel@gmail.com?subject=Demande CV — Rodel DZIKA-MACKANGAS">
+          <span class="abtn-icon">📄</span> Télécharger le CV
+        </a>
+        <a class="abtn teal" href="#" onclick="go('projets');return false;">
+          <span class="abtn-icon">🔍</span> Visualiser les projets
+        </a>
+        <a class="abtn outline" href="mailto:dzikamackangasrodel@gmail.com">
+          <span class="abtn-icon">✉️</span> Contacter par mail
+        </a>
+        <button class="abtn gold" onclick="openRef()">
+          <span class="abtn-icon">⭐</span> Demander une référence
+        </button>
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <div class="pframe">
+        <div class="pinner"><img src="data:image/png;base64,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" alt="Rodel DZIKA-MACKANGAS"/></div>
+        <div class="pbadge"><div class="pbdot"></div><span class="pbtxt">Disponible · Villeurbanne 69</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="sblock"><div class="snum">4+</div><div class="slabel">Années d'expérience</div></div>
+    <div class="sblock"><div class="snum">10+</div><div class="slabel">Projets réalisés</div></div>
+    <div class="sblock"><div class="snum">5</div><div class="slabel">Secteurs couverts</div></div>
+    <div class="sblock"><div class="snum">3</div><div class="slabel">Produits industrialisés</div></div>
+  </div>
+</section>
+
+<!-- ════════════════ PROJETS ════════════════ -->
+<section id="projets">
+  <div class="pw">
+    <div class="sh fi">
+      <div class="se">Section 02 — Projets</div>
+      <div class="st">Mes <span>Réalisations</span></div>
+      <div class="ssub">Projets personnels et professionnels · Chaque projet indique sa dimension Backend et/ou Frontend.</div>
+    </div>
+
+    <!-- FILTRES -->
+    <div class="filter-row fi">
+      <button class="ftab on" onclick="filter('all',this)">Tous les projets</button>
+      <button class="ftab" onclick="filter('perso',this)">Projets personnels</button>
+      <button class="ftab" onclick="filter('pro',this)">Projets professionnels</button>
+      <button class="ftab" onclick="filter('fe',this)">Frontend</button>
+      <button class="ftab" onclick="filter('be',this)">Backend</button>
+    </div>
+
+    <div class="pgrid">
+
+      <!-- VisionPack -->
+      <a class="pcard feat fi" data-type="perso" data-fe="1" data-be="1" href="https://github.com/rodeldzika" target="_blank" rel="noopener">
+        <div class="ctop">
+          <span class="cnum">Produit Personnel</span>
+          <div class="cbadges">
+            <span class="cbdg blue">Industrie</span>
+            <span class="cbdg fe">Frontend</span>
+            <span class="cbdg be">Backend</span>
+          </div>
+        </div>
+        <div><div class="cname">VisionPack Inspector</div><div class="crole">Interface Tactile + SoC STM32MP157</div></div>
+        <div class="cdesc">Inspection qualité embarquée sur ligne de production. Interface PyQt opérateur temps réel (Frontend) + architecture SoC STM32MP157 A7/M4, Linux embarqué, sorties 24V OK/NOK (Backend).</div>
+        <div class="ctags"><span class="ctag">Python·PyQt</span><span class="ctag">STM32MP157</span><span class="ctag">Linux Embarqué</span><span class="ctag">FreeRTOS</span><span class="ctag">RPMsg</span></div>
+        <div class="carrow">Voir le projet <span>→</span></div>
+      </a>
+
+      <!-- CEBS -->
+      <a class="pcard feat fi" data-type="perso" data-be="1" href="https://github.com/rodeldzika" target="_blank" rel="noopener">
+        <div class="ctop">
+          <span class="cnum">Produit Personnel · En vente</span>
+          <div class="cbadges">
+            <span class="cbdg teal">Industrie</span>
+            <span class="cbdg be">Backend</span>
+          </div>
+        </div>
+        <div><div class="cname">CEBS</div><div class="crole">Card Electrical to Box of the Sensor</div></div>
+        <div class="cdesc">Gamme de boîtiers industriels 24 VDC pour intégration de capteurs. PCB 2/4 couches. Actuellement commercialisé et utilisé chez des industriels.</div>
+        <div class="ctags"><span class="ctag">PCB 2/4 couches</span><span class="ctag">24V</span><span class="ctag">Altium Designer</span><span class="ctag">Commercialisé</span></div>
+        <div class="carrow">Voir le produit <span>→</span></div>
+      </a>
+
+      <!-- CardioEdge -->
+      <a class="pcard fi" data-type="perso" data-fe="1" data-be="1" href="https://github.com/rodeldzika" target="_blank" rel="noopener">
+        <div class="ctop">
+          <span class="cnum">Projet Personnel</span>
+          <div class="cbadges">
+            <span class="cbdg gold">Médical</span>
+            <span class="cbdg fe">Frontend</span>
+            <span class="cbdg be">Backend</span>
+          </div>
+        </div>
+        <div><div class="cname">CardioEdge</div><div class="crole">Dispositif Médical Embarqué · IEC 62304</div></div>
+        <div class="cdesc">Surveillance cardio-respiratoire (ECG, SpO₂, Température). IA embarquée CNN+RNN/LSTM (Backend) + IHM clinique sécurisée niveaux STABLE/CRITIQUE (Frontend). Classe B IEC 62304.</div>
+        <div class="ctags"><span class="ctag">Alif AE722F</span><span class="ctag">CNN+RNN</span><span class="ctag">IEC 62304</span><span class="ctag">Python IA</span></div>
+        <div class="carrow">Voir le projet <span>→</span></div>
+      </a>
+
+      <!-- STARC BIOMAE -->
+      <a class="pcard fi" data-type="pro" data-be="1" href="https://github.com/rodeldzika" target="_blank" rel="noopener">
+        <div class="ctop">
+          <span class="cnum">Chef de Projet · BIOMAE</span>
+          <div class="cbadges">
+            <span class="cbdg teal">Aquatique</span>
+            <span class="cbdg be">Backend</span>
+          </div>
+        </div>
+        <div><div class="cname">STARC</div><div class="crole">Système de Tri Automatisé Aquatique</div></div>
+        <div class="cdesc">Architecture MBSE complète Arcadia/Capella (OA→SA→LA→PA). Modules hydrauliques (Venturi, turbines), capteurs Keyence, SolidWorks, prototypage 3D. Encadrement stagiaire.</div>
+        <div class="ctags"><span class="ctag">MBSE Arcadia</span><span class="ctag">Capella</span><span class="ctag">SolidWorks</span><span class="ctag">Hydraulique</span></div>
+        <div class="carrow">Voir le projet <span>→</span></div>
+      </a>
+
+      <!-- NOVA-SYS -->
+      <a class="pcard fi" data-type="pro" data-be="1" href="https://github.com/rodeldzika" target="_blank" rel="noopener">
+        <div class="ctop">
+          <span class="cnum">Chef de Projet · NOVA-SYS</span>
+          <div class="cbadges">
+            <span class="cbdg blue">Machines Ind.</span>
+            <span class="cbdg be">Backend</span>
+          </div>
+        </div>
+        <div><div class="cname">NOVA-SYS</div><div class="crole">Machines Spéciales &amp; Préhenseurs Robotisés</div></div>
+        <div class="cdesc">Conception machines spéciales et préhenseurs robotisés, clients internationaux (Europe de l'Est). Cycle en V complet, PCB 2/4 couches, Dobot CR/RoboDK, mise en service terrain.</div>
+        <div class="ctags"><span class="ctag">Chef de Projet</span><span class="ctag">PCB 2/4 couches</span><span class="ctag">Dobot CR</span><span class="ctag">RoboDK</span></div>
+        <div class="carrow">Voir le projet <span>→</span></div>
+      </a>
+
+      <!-- LANCEY -->
+      <a class="pcard fi" data-type="pro" data-be="1" href="https://github.com/rodeldzika" target="_blank" rel="noopener">
+        <div class="ctop">
+          <span class="cnum">1er Emploi · LANCEY Energy Storage</span>
+          <div class="cbadges">
+            <span class="cbdg gold">Énergie</span>
+            <span class="cbdg be">Backend</span>
+          </div>
+        </div>
+        <div><div class="cname">LANCEY Energy Storage</div><div class="crole">Firmware STM32 · Bancs de Test · CI/CD</div></div>
+        <div class="cdesc">Firmware STM32 FreeRTOS pour gestion énergétique. Logiciels de test C#, bancs de production PowerMeter. Pipeline CI/CD GitLab. Agile sprints 3 semaines.</div>
+        <div class="ctags"><span class="ctag">STM32 FreeRTOS</span><span class="ctag">C#</span><span class="ctag">PeakCAN</span><span class="ctag">GitLab CI/CD</span></div>
+        <div class="carrow">Voir le projet <span>→</span></div>
+      </a>
+
+      <!-- REV Dashboard -->
+      <a class="pcard fi" data-type="pro" data-fe="1" href="https://github.com/rodeldzika" target="_blank" rel="noopener">
+        <div class="ctop">
+          <span class="cnum">Stage Fin d'Études · REV Mobilities</span>
+          <div class="cbadges">
+            <span class="cbdg teal">Automobile</span>
+            <span class="cbdg fe">Frontend</span>
+          </div>
+        </div>
+        <div><div class="cname">Dashboard Véhicule Rétrofité</div><div class="crole">Interface Embarquée · Bus CAN/RS232</div></div>
+        <div class="cdesc">Interfaces graphiques embarquées from scratch pour tableau de bord véhicules rétrofités. Données CAN temps réel (OrionBMS, PeakCAN). Conception PCB KiCad V7.</div>
+        <div class="ctags"><span class="ctag">C Embarqué</span><span class="ctag">Bus CAN</span><span class="ctag">RS232</span><span class="ctag">KiCad V7</span></div>
+        <div class="carrow">Voir le projet <span>→</span></div>
+      </a>
+
+      <!-- Robot Poisson -->
+      <a class="pcard fi" data-type="perso" data-fe="1" href="https://github.com/rodeldzika" target="_blank" rel="noopener">
+        <div class="ctop">
+          <span class="cnum">Projet Académique · Master 2</span>
+          <div class="cbadges">
+            <span class="cbdg teal">Recherche</span>
+            <span class="cbdg fe">Frontend</span>
+          </div>
+        </div>
+        <div><div class="cname">Robot Piloté par Carpe Rouge</div><div class="crole">Tracking Visuel · Interaction Biologique</div></div>
+        <div class="cdesc">Vision traduit les mouvements d'un poisson en commandes robot. Pipeline OpenCV + filtre de Kalman temps réel. Interface visualisation flux caméra. UART Raspberry Pi / Arduino.</div>
+        <div class="ctags"><span class="ctag">Python OpenCV</span><span class="ctag">Kalman</span><span class="ctag">Raspberry Pi</span><span class="ctag">Arduino</span></div>
+        <div class="carrow">Voir le projet <span>→</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SECTEURS ════════════════ -->
+<section id="secteurs">
+  <div class="pw">
+    <div class="sh fi">
+      <div class="se">Section 03 — Secteurs</div>
+      <div class="st">Domaines <span>d'Intervention</span></div>
+      <div class="ssub">Cliquez sur un secteur pour voir les normes, contraintes, outils et projets associés.</div>
+    </div>
+
+    <div class="sec-grid fi">
+
+      <div class="sec-card" onclick="toggleSector('medical')">
+        <div class="sec-top"><span class="sec-ico">🏥</span><div><div class="sec-name">Médical</div><div class="sec-sub">Dispositifs médicaux · Systèmes critiques</div></div></div>
+        <div class="sec-projs">
+          <span class="sec-proj-tag">CardioEdge</span>
+        </div>
+      </div>
+
+      <div class="sec-card" onclick="toggleSector('aqua')">
+        <div class="sec-top"><span class="sec-ico">🌊</span><div><div class="sec-name">Milieu Aquatique</div><div class="sec-sub">Tri automatisé · Hydraulique · Biologique</div></div></div>
+        <div class="sec-projs">
+          <span class="sec-proj-tag">STARC — BIOMAE</span>
+          <span class="sec-proj-tag">Robot Poisson</span>
+        </div>
+      </div>
+
+      <div class="sec-card" onclick="toggleSector('energie')">
+        <div class="sec-top"><span class="sec-ico">⚡</span><div><div class="sec-name">Énergie</div><div class="sec-sub">Stockage énergie · Firmware · Test</div></div></div>
+        <div class="sec-projs">
+          <span class="sec-proj-tag">LANCEY Energy Storage</span>
+        </div>
+      </div>
+
+      <div class="sec-card" onclick="toggleSector('machines')">
+        <div class="sec-top"><span class="sec-ico">🏭</span><div><div class="sec-name">Machines Industrielles</div><div class="sec-sub">Préhenseurs · Automatisation · PCB</div></div></div>
+        <div class="sec-projs">
+          <span class="sec-proj-tag">NOVA-SYS</span>
+          <span class="sec-proj-tag">CEBS</span>
+          <span class="sec-proj-tag">VisionPack</span>
+        </div>
+      </div>
+
+      <div class="sec-card" onclick="toggleSector('auto')">
+        <div class="sec-top"><span class="sec-ico">🚗</span><div><div class="sec-name">Automobile</div><div class="sec-sub">Véhicules rétrofités · Bus CAN · Dashboard</div></div></div>
+        <div class="sec-projs">
+          <span class="sec-proj-tag">REV Mobilities</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DETAIL PANELS -->
+    <div id="sec-medical" class="sec-detail">
+      <div class="sd-title">🏥 Secteur Médical</div>
+      <div class="sd-grid">
+        <div class="sd-block"><div class="sd-bttl">Normes rencontrées</div><div class="sd-items"><span class="sd-item">IEC 62304 — Logiciel dispositif médical</span><span class="sd-item">Classe B — Aide à la décision</span><span class="sd-item">Traçabilité complète des exigences</span></div></div>
+        <div class="sd-block"><div class="sd-bttl">Contraintes</div><div class="sd-items"><span class="sd-item">Aucune décision automatisée</span><span class="sd-item">États sécurisés explicites</span><span class="sd-item">Logs horodatés obligatoires</span><span class="sd-item">Validation V&amp;V rigoureuse</span></div></div>
+        <div class="sd-block"><div class="sd-bttl">Outils de gestion</div><div class="sd-items"><span class="sd-item">STM32CubeIDE / ESP-IDF</span><span class="sd-item">Python (CNN, RNN/LSTM)</span><span class="sd-item">JSON structuré inter-modules</span><span class="sd-item">GitLab CI/CD</span></div></div>
+      </div>
+      <div class="sd-projs-title">Projets associés</div>
+      <div class="sd-proj-list">
+        <div class="sd-proj"><span class="sd-proj-name">CardioEdge</span><span class="sd-proj-type perso">Personnel</span><span class="sd-proj-fe">Frontend</span><span class="sd-proj-be">Backend</span></div>
+      </div>
+    </div>
+
+    <div id="sec-aqua" class="sec-detail">
+      <div class="sd-title">🌊 Milieu Aquatique</div>
+      <div class="sd-grid">
+        <div class="sd-block"><div class="sd-bttl">Normes / Méthodes</div><div class="sd-items"><span class="sd-item">MBSE — Méthode Arcadia</span><span class="sd-item">Capella OA→SA→LA→PA</span><span class="sd-item">Cycle en V complet</span></div></div>
+        <div class="sd-block"><div class="sd-bttl">Contraintes</div><div class="sd-items"><span class="sd-item">Organismes vivants</span><span class="sd-item">Milieu aqueux — étanchéité</span><span class="sd-item">Fluidique basse pression</span><span class="sd-item">Prototypage rapide</span></div></div>
+        <div class="sd-block"><div class="sd-bttl">Outils</div><div class="sd-items"><span class="sd-item">Capella (MBSE)</span><span class="sd-item">SolidWorks (CAO)</span><span class="sd-item">Bambu Lab (3D)</span><span class="sd-item">Python OpenCV</span></div></div>
+      </div>
+      <div class="sd-projs-title">Projets associés</div>
+      <div class="sd-proj-list">
+        <div class="sd-proj"><span class="sd-proj-name">STARC — BIOMAE</span><span class="sd-proj-type pro">Professionnel</span><span class="sd-proj-be">Backend</span></div>
+        <div class="sd-proj"><span class="sd-proj-name">Robot Piloté par Carpe Rouge</span><span class="sd-proj-type perso">Académique</span><span class="sd-proj-fe">Frontend</span></div>
+      </div>
+    </div>
+
+    <div id="sec-energie" class="sec-detail">
+      <div class="sd-title">⚡ Secteur Énergie</div>
+      <div class="sd-grid">
+        <div class="sd-block"><div class="sd-bttl">Méthodes</div><div class="sd-items"><span class="sd-item">Agile Scrum (sprints 3 sem.)</span><span class="sd-item">CI/CD GitLab</span><span class="sd-item">Flashage CLI STLink/JLink</span></div></div>
+        <div class="sd-block"><div class="sd-bttl">Contraintes</div><div class="sd-items"><span class="sd-item">Fiabilité firmware critique</span><span class="sd-item">Tests automatisés déployés fournisseurs</span><span class="sd-item">Gestion versions multi-firmware</span></div></div>
+        <div class="sd-block"><div class="sd-bttl">Outils</div><div class="sd-items"><span class="sd-item">STM32CubeIDE (C embarqué)</span><span class="sd-item">Visual Studio (C# test)</span><span class="sd-item">PeakCAN · Modbus</span><span class="sd-item">GitLab CI/CD</span></div></div>
+      </div>
+      <div class="sd-projs-title">Projets associés</div>
+      <div class="sd-proj-list">
+        <div class="sd-proj"><span class="sd-proj-name">LANCEY Energy Storage</span><span class="sd-proj-type pro">1er Emploi</span><span class="sd-proj-be">Backend</span></div>
+      </div>
+    </div>
+
+    <div id="sec-machines" class="sec-detail">
+      <div class="sd-title">🏭 Machines Industrielles</div>
+      <div class="sd-grid">
+        <div class="sd-block"><div class="sd-bttl">Méthodes</div><div class="sd-items"><span class="sd-item">Cycle en V complet</span><span class="sd-item">ERP — gestion ressources</span><span class="sd-item">GitLab CI/CD</span></div></div>
+        <div class="sd-block"><div class="sd-bttl">Contraintes</div><div class="sd-items"><span class="sd-item">Clients internationaux</span><span class="sd-item">Mise en service terrain</span><span class="sd-item">Normes industrielles 24V</span><span class="sd-item">Multi-domaines (méca/élec/auto)</span></div></div>
+        <div class="sd-block"><div class="sd-bttl">Outils</div><div class="sd-items"><span class="sd-item">Altium Designer / KiCad V9</span><span class="sd-item">DobotStudio / RoboDK</span><span class="sd-item">SolidWorks / TopSolid</span><span class="sd-item">ERP · JIRA · GanttProject</span></div></div>
+      </div>
+      <div class="sd-projs-title">Projets associés</div>
+      <div class="sd-proj-list">
+        <div class="sd-proj"><span class="sd-proj-name">NOVA-SYS</span><span class="sd-proj-type pro">Professionnel</span><span class="sd-proj-be">Backend</span></div>
+        <div class="sd-proj"><span class="sd-proj-name">CEBS</span><span class="sd-proj-type perso">Personnel</span><span class="sd-proj-be">Backend</span></div>
+        <div class="sd-proj"><span class="sd-proj-name">VisionPack Inspector</span><span class="sd-proj-type perso">Personnel</span><span class="sd-proj-fe">Frontend</span><span class="sd-proj-be">Backend</span></div>
+      </div>
+    </div>
+
+    <div id="sec-auto" class="sec-detail">
+      <div class="sd-title">🚗 Secteur Automobile</div>
+      <div class="sd-grid">
+        <div class="sd-block"><div class="sd-bttl">Normes / Protocoles</div><div class="sd-items"><span class="sd-item">Bus CAN (J1939, OBD)</span><span class="sd-item">Fichiers .dbc véhicule</span><span class="sd-item">RS232 · RS485</span></div></div>
+        <div class="sd-block"><div class="sd-bttl">Contraintes</div><div class="sd-items"><span class="sd-item">Temps réel strict</span><span class="sd-item">Interface embarquée robuste</span><span class="sd-item">Compatibilité multi-véhicules</span></div></div>
+        <div class="sd-block"><div class="sd-bttl">Outils</div><div class="sd-items"><span class="sd-item">STM32CubeIDE / Arduino IDE</span><span class="sd-item">KiCad V7 (PCB)</span><span class="sd-item">PeakCAN · Bus Master</span><span class="sd-item">Matlab Simulink</span></div></div>
+      </div>
+      <div class="sd-projs-title">Projets associés</div>
+      <div class="sd-proj-list">
+        <div class="sd-proj"><span class="sd-proj-name">Dashboard Véhicule — REV Mobilities</span><span class="sd-proj-type pro">Stage Fin d'Études</span><span class="sd-proj-fe">Frontend</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════ CONTACT ════════════════ -->
+<section id="contact">
+  <div class="pw">
+    <div class="sh fi">
+      <div class="se">Section 04 — Contact</div>
+      <div class="st">Entrons en <span>Contact</span></div>
+      <div class="ssub">Disponible pour des missions en systèmes embarqués, robotique ou architecture mécatronique. Villeurbanne (69) · Remote OK.</div>
+    </div>
+
+    <div class="contact-hero fi">
+      <div>
+        <div class="cht">Discutons de votre <span>projet</span></div>
+        <p class="chs">Chef de Projet Mécatronique, spécialisé systèmes embarqués, vision industrielle et architecture multi-domaines. Interventions en France et à l'international.</p>
+        <div style="margin-top:1.2rem;display:flex;flex-wrap:wrap;gap:0.4rem;">
+          <span class="chip b" style="font-size:0.65rem;">CDI</span>
+          <span class="chip t" style="font-size:0.65rem;">Freelance</span>
+          <span class="chip g" style="font-size:0.65rem;">Mission</span>
+          <span class="chip b" style="font-size:0.65rem;">Remote OK</span>
+        </div>
+      </div>
+      <div class="contact-btns">
+        <a class="cbtn" href="mailto:dzikamackangasrodel@gmail.com?subject=Contact Portfolio — Rodel DZIKA-MACKANGAS">
+          <span class="cbtn-icon">✉️</span><span class="cbtn-label">Email</span>dzikamackangasrodel@gmail.com
+        </a>
+        <a class="cbtn" href="https://www.linkedin.com/in/rodeldzika/" target="_blank" rel="noopener">
+          <span class="cbtn-icon">🔗</span><span class="cbtn-label">LinkedIn</span>linkedin.com/in/rodeldzika
+        </a>
+        <a class="cbtn" href="tel:+33748323356">
+          <span class="cbtn-icon">📱</span><span class="cbtn-label">Tel 1</span>(+33) 7 48 32 33 56
+        </a>
+        <a class="cbtn" href="tel:+33751213946">
+          <span class="cbtn-icon">📱</span><span class="cbtn-label">Tel 2</span>(+33) 7 51 21 39 46
+        </a>
+        <a class="cbtn" href="mailto:dzikamackangasrodel@gmail.com?subject=Demande de CV — Portfolio&body=Bonjour Rodel, je souhaite recevoir votre CV. Merci.">
+          <span class="cbtn-icon">📄</span><span class="cbtn-label">CV</span>Télécharger le CV
+        </a>
+        <button class="cbtn ref-btn" onclick="openRef()">
+          <span class="cbtn-icon">⭐</span><span class="cbtn-label">Référence</span>Demander une référence
+        </button>
+      </div>
+    </div>
+
+    <!-- XP -->
+    <div class="divb fi"><span class="divb-label">Parcours</span><div class="divb-line"></div></div>
+    <div class="xpl fi">
+      <div class="xpi">
+        <div class="xpl-left"><div class="xdate">Mars 2026<br>→ Avr. 2026</div><div class="xco">BIOMAE</div></div>
+        <div><div class="xjob">Chef de Projet Mécatronique</div><div class="xcomp">BIOMAE · Château-Gaillard · Milieu Aquatique</div><div class="xdesc">Pilotage global STARC (cadrage→prototypage). Architecture MBSE Arcadia/Capella. Hydraulique, SolidWorks, Keyence, impression 3D. Encadrement stagiaire.</div></div>
+      </div>
+      <div class="xpi">
+        <div class="xpl-left"><div class="xdate">Sept. 2024<br>→ Oct. 2025</div><div class="xco">NOVA-SYS</div></div>
+        <div><div class="xjob">Chef de Projet Mécatronique</div><div class="xcomp">NOVA-SYS · Lentilly (69) · Machines Industrielles</div><div class="xdesc">Conception machines spéciales et préhenseurs robotisés. Clients internationaux (Europe de l'Est). Cycle en V, PCB 2/4 couches, Dobot CR, mise en service terrain.</div></div>
+      </div>
+      <div class="xpi">
+        <div class="xpl-left"><div class="xdate">Fév. 2024<br>→ Juin 2024</div><div class="xco">LANCEY</div></div>
+        <div><div class="xjob">1er Emploi — Ingénieur Support Qualité</div><div class="xcomp">LANCEY Energy Storage · Grenoble (38) · Énergie</div><div class="xdesc">Firmware STM32 FreeRTOS, logiciels test C#, bancs production. CI/CD GitLab. Agile sprints 3 semaines.</div></div>
+      </div>
+      <div class="xpi">
+        <div class="xpl-left"><div class="xdate">Avr. 2023<br>→ Sept. 2023</div><div class="xco">REV MOB.</div></div>
+        <div><div class="xjob">Stage Fin d'Études — Ingénieur Embarqué</div><div class="xcomp">REV Mobilities · Paris (75) · Automobile</div><div class="xdesc">Interfaces graphiques embarquées CAN/RS232, PCB KiCad V7, analyse .dbc véhicule (PeakCAN, Matlab Simulink).</div></div>
+      </div>
+    </div>
+
+    <div class="divb fi"><span class="divb-label">Formations</span><div class="divb-line"></div></div>
+    <div class="fgrid fi">
+      <div class="fblock"><div class="fyear">2021 — 2023</div><div class="fdeg">Master Mécatronique</div><div class="fschool">EiSINe · Reims</div></div>
+      <div class="fblock"><div class="fyear">2020 — 2021</div><div class="fdeg">Licence EEA</div><div class="fschool">EiSINe · Reims</div></div>
+      <div class="fblock"><div class="fyear">2016 — 2019</div><div class="fdeg">LP Électrotechnique</div><div class="fschool">ENSP · Brazzaville, Congo</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL RÉFÉRENCE -->
+<div class="modal-overlay" id="refModal" onclick="closeRef(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeRef()">✕</button>
+    <div class="modal-title">⭐ Demander une référence</div>
+    <div class="modal-sub">Vous souhaitez contacter Rodel pour une recommandation ou une mise en relation ? Remplissez ce formulaire — il recevra votre demande par email et vous recontactera pour valider.</div>
+    <div class="mfield">
+      <label>Votre nom complet</label>
+      <input type="text" id="ref-nom" placeholder="Jean Dupont"/>
+    </div>
+    <div class="mfield">
+      <label>Votre email</label>
+      <input type="email" id="ref-email" placeholder="jean@entreprise.com"/>
+    </div>
+    <div class="mfield">
+      <label>Votre entreprise / organisation</label>
+      <input type="text" id="ref-company" placeholder="Nom de l'entreprise"/>
+    </div>
+    <div class="mfield">
+      <label>Motif de la demande</label>
+      <select id="ref-motif">
+        <option value="recommandation">Recommandation professionnelle</option>
+        <option value="recrutement">Recrutement — vérification de référence</option>
+        <option value="partenariat">Proposition de partenariat</option>
+        <option value="autre">Autre</option>
+      </select>
+    </div>
+    <div class="mfield">
+      <label>Message (optionnel)</label>
+      <textarea id="ref-msg" placeholder="Précisez votre demande..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="mbtn-cancel" onclick="closeRef()">Annuler</button>
+      <button class="mbtn-send" onclick="sendRef()">Envoyer la demande ✉️</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Navigation
+function go(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('nav-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(initFI,80);
+}
+
+// Fade-in on scroll
+function initFI(){
+  const active=document.querySelector('section.active');
+  if(!active)return;
+  const els=active.querySelectorAll('.fi:not(.vis)');
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*65);obs.unobserve(e.target);}
+    });
+  },{threshold:0.04});
+  els.forEach(el=>obs.observe(el));
+}
+window.addEventListener('load',initFI);
+
+// Filter projets
+function filter(type, btn){
+  document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.pcard').forEach(c=>{
+    if(type==='all'){c.classList.remove('hidden');return;}
+    if(type==='perso'){c.classList.toggle('hidden',c.dataset.type!=='perso');return;}
+    if(type==='pro'){c.classList.toggle('hidden',c.dataset.type!=='pro');return;}
+    if(type==='fe'){c.classList.toggle('hidden',!c.dataset.fe);return;}
+    if(type==='be'){c.classList.toggle('hidden',!c.dataset.be);return;}
+  });
+}
+
+// Sector detail toggle
+function toggleSector(id){
+  const panel=document.getElementById('sec-'+id);
+  const allCards=document.querySelectorAll('.sec-card');
+  const allPanels=document.querySelectorAll('.sec-detail');
+  const isOpen=panel.classList.contains('open');
+  allPanels.forEach(p=>p.classList.remove('open'));
+  allCards.forEach(c=>c.classList.remove('open'));
+  if(!isOpen){
+    panel.classList.add('open');
+    event.currentTarget.classList.add('open');
+    setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
+  }
+}
+
+// Référence modal
+function openRef(){document.getElementById('refModal').classList.add('open');}
+function closeRef(e){if(!e||e.target===document.getElementById('refModal'))document.getElementById('refModal').classList.remove('open');}
+function sendRef(){
+  const nom=document.getElementById('ref-nom').value.trim();
+  const email=document.getElementById('ref-email').value.trim();
+  const company=document.getElementById('ref-company').value.trim();
+  const motif=document.getElementById('ref-motif').value;
+  const msg=document.getElementById('ref-msg').value.trim();
+  if(!nom||!email){alert('Merci de renseigner votre nom et email.');return;}
+  const motifs={recommandation:'Recommandation professionnelle',recrutement:'Recrutement — vérification de référence',partenariat:'Proposition de partenariat',autre:'Autre'};
+  const subject=encodeURIComponent('Demande de référence — '+nom+' ('+company+')');
+  const body=encodeURIComponent('Bonjour Rodel,\n\n'+nom+' ('+company+') souhaite vous contacter pour : '+motifs[motif]+'.\n\nEmail de contact : '+email+'\n\n'+(msg?'Message :\n'+msg:'')+'\n\nCette demande a été envoyée depuis votre portfolio.');
+  window.location.href='mailto:dzikamackangasrodel@gmail.com?subject='+subject+'&body='+body;
+  document.getElementById('refModal').classList.remove('open');
+}
+</script>
+</body>
+</html>
