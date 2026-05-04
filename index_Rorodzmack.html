@@ -295,7 +295,7 @@ section.active{display:block;}
   </div>
 
   <div class="stats">
-    <div class="sblock"><div class="snum">4+</div><div class="slabel">Années d'expérience</div></div>
+    <div class="sblock"><div class="snum">3+</div><div class="slabel">Années d'expérience</div></div>
     <div class="sblock"><div class="snum">10+</div><div class="slabel">Projets réalisés</div></div>
     <div class="sblock"><div class="snum">5</div><div class="slabel">Secteurs couverts</div></div>
     <div class="sblock"><div class="snum">3</div><div class="slabel">Produits industrialisés</div></div>
@@ -314,10 +314,14 @@ section.active{display:block;}
     <!-- FILTRES -->
     <div class="filter-row fi">
       <button class="ftab on" onclick="filter('all',this)">Tous les projets</button>
-      <button class="ftab" onclick="filter('perso',this)">Projets personnels</button>
-      <button class="ftab" onclick="filter('pro',this)">Projets professionnels</button>
-      <button class="ftab" onclick="filter('fe',this)">Frontend</button>
-      <button class="ftab" onclick="filter('be',this)">Backend</button>
+      <button class="ftab" onclick="filter('perso',this)">Projets Personnels</button>
+      <button class="ftab" onclick="filter('pro',this)">Projets Professionnels</button>
+    </div>
+    <div class="filter-row fi" id="sub-filters" style="margin-top:-1rem;margin-bottom:1.5rem;">
+      <span style="font-size:0.68rem;color:var(--text3);font-weight:600;letter-spacing:0.1em;padding:0.4rem 0.2rem;">Affiner ›</span>
+      <button class="ftab" onclick="filterSub('fe',this)">Frontend</button>
+      <button class="ftab" onclick="filterSub('be',this)">Backend</button>
+      <button class="ftab" onclick="filterSub('both',this)">Frontend + Backend</button>
     </div>
 
     <div class="pgrid">
@@ -402,7 +406,7 @@ section.active{display:block;}
       <!-- LANCEY -->
       <a class="pcard fi" data-type="pro" data-be="1" href="https://github.com/rodeldzika" target="_blank" rel="noopener">
         <div class="ctop">
-          <span class="cnum">1er Emploi · LANCEY Energy Storage</span>
+          <span class="cnum">LANCEY Energy Storage</span>
           <div class="cbadges">
             <span class="cbdg gold">Énergie</span>
             <span class="cbdg be">Backend</span>
@@ -536,7 +540,7 @@ section.active{display:block;}
       </div>
       <div class="sd-projs-title">Projets associés</div>
       <div class="sd-proj-list">
-        <div class="sd-proj"><span class="sd-proj-name">LANCEY Energy Storage</span><span class="sd-proj-type pro">1er Emploi</span><span class="sd-proj-be">Backend</span></div>
+        <div class="sd-proj"><span class="sd-proj-name">LANCEY Energy Storage</span><span class="sd-proj-type pro">Professionnel</span><span class="sd-proj-be">Backend</span></div>
       </div>
     </div>
 
@@ -586,9 +590,8 @@ section.active{display:block;}
         <p class="chs">Chef de Projet Mécatronique, spécialisé systèmes embarqués, vision industrielle et architecture multi-domaines. Interventions en France et à l'international.</p>
         <div style="margin-top:1.2rem;display:flex;flex-wrap:wrap;gap:0.4rem;">
           <span class="chip b" style="font-size:0.65rem;">CDI</span>
-          <span class="chip t" style="font-size:0.65rem;">Freelance</span>
-          <span class="chip g" style="font-size:0.65rem;">Mission</span>
-          <span class="chip b" style="font-size:0.65rem;">Remote OK</span>
+          <span class="chip t" style="font-size:0.65rem;">CDD</span>
+          <span class="chip g" style="font-size:0.65rem;">Freelance</span>
         </div>
       </div>
       <div class="contact-btns">
@@ -626,7 +629,7 @@ section.active{display:block;}
       </div>
       <div class="xpi">
         <div class="xpl-left"><div class="xdate">Fév. 2024<br>→ Juin 2024</div><div class="xco">LANCEY</div></div>
-        <div><div class="xjob">1er Emploi — Ingénieur Support Qualité</div><div class="xcomp">LANCEY Energy Storage · Grenoble (38) · Énergie</div><div class="xdesc">Firmware STM32 FreeRTOS, logiciels test C#, bancs production. CI/CD GitLab. Agile sprints 3 semaines.</div></div>
+        <div><div class="xjob">Ingénieur Support Qualité Systèmes Embarqués</div><div class="xcomp">LANCEY Energy Storage · Grenoble (38) · Énergie</div><div class="xdesc">Firmware STM32 FreeRTOS, logiciels test C#, bancs production. CI/CD GitLab. Agile sprints 3 semaines.</div></div>
       </div>
       <div class="xpi">
         <div class="xpl-left"><div class="xdate">Avr. 2023<br>→ Sept. 2023</div><div class="xco">REV MOB.</div></div>
@@ -708,15 +711,34 @@ function initFI(){
 window.addEventListener('load',initFI);
 
 // Filter projets
+let currentType = 'all';
+let currentSub = null;
+
 function filter(type, btn){
-  document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.filter-row:first-of-type .ftab').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
+  currentType = type;
+  currentSub = null;
+  document.querySelectorAll('#sub-filters .ftab').forEach(b=>b.classList.remove('on'));
+  applyFilters();
+}
+
+function filterSub(sub, btn){
+  document.querySelectorAll('#sub-filters .ftab').forEach(b=>b.classList.remove('on'));
+  if(currentSub === sub){ currentSub = null; }
+  else { btn.classList.add('on'); currentSub = sub; }
+  applyFilters();
+}
+
+function applyFilters(){
   document.querySelectorAll('.pcard').forEach(c=>{
-    if(type==='all'){c.classList.remove('hidden');return;}
-    if(type==='perso'){c.classList.toggle('hidden',c.dataset.type!=='perso');return;}
-    if(type==='pro'){c.classList.toggle('hidden',c.dataset.type!=='pro');return;}
-    if(type==='fe'){c.classList.toggle('hidden',!c.dataset.fe);return;}
-    if(type==='be'){c.classList.toggle('hidden',!c.dataset.be);return;}
+    let show = true;
+    if(currentType === 'perso') show = c.dataset.type === 'perso';
+    if(currentType === 'pro')   show = c.dataset.type === 'pro';
+    if(show && currentSub === 'fe')   show = !!c.dataset.fe && !c.dataset.be;
+    if(show && currentSub === 'be')   show = !!c.dataset.be && !c.dataset.fe;
+    if(show && currentSub === 'both') show = !!c.dataset.fe && !!c.dataset.be;
+    c.classList.toggle('hidden', !show);
   });
 }
 
